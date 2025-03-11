@@ -5,14 +5,14 @@ namespace Domain;
 
 class ShoppingCart {
     public function __construct(
-        private string $orderId,
+        private string $shoppingCartId,
         private string $customerId,
         private \dateTime $date,
         private array $productList,
    ){}
 
-    public function getOrderId(): string{
-        return $this->orderId;
+    public function getShoppingCartId(): string{
+        return $this->shoppingCartId;
     }
     public function getCustomerId(): string{
         return $this->customerId;
@@ -26,8 +26,8 @@ class ShoppingCart {
         return $this->date;
     }
 
-    public function setOrderId(string $orderId): void{
-        $this->orderId = $orderId;
+    public function setShoppingCartId(string $shoppingCartId): void{
+        $this->shoppingCartId = $shoppingCartId;
     }
 
     public function setCustomerId(string $customerId): void{
