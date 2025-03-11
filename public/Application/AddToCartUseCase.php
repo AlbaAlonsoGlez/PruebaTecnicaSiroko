@@ -35,7 +35,7 @@ final readonly class AddToCartUseCase
         $shoppingCart = $this->shoppingCartRepository->findByCustomerId($customerId);
 
         if (!$shoppingCart) {
-            $shoppingCart = new ShoppingCart($customerId);
+            $shoppingCart = new ShoppingCart( $customerId);
             $this->shoppingCartRepository->save($shoppingCart);
         }
 
@@ -49,7 +49,7 @@ final readonly class AddToCartUseCase
             throw new NoStockAvailableException();
         }
 
-        $order = new Order($productId, $quantity);
+        $order = new Order(itemId: $productId, quantity: $quantity);
 
         $shoppingCart->addProduct($order);
 
