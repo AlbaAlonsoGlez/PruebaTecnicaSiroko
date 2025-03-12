@@ -9,6 +9,7 @@ class Customer  {
         private string $name,
         private string $email,
         private int $phone,
+        private string $address,
    ){}
 
    public function getId(): string{
@@ -24,6 +25,9 @@ class Customer  {
    public function getPhone(): int{
        return $this->phone;
    }
+    public function getAddress(): string{
+         return $this->address;
+    }
    public function setId(string $id): void{
        $this->id = $id;
    }
@@ -38,4 +42,7 @@ class Customer  {
     public function setPhone(int $phone): void{
         $this->phone = $phone;
     }
+    public function setAddress(string $address): void{
+        $this->address = $address;
+    }   
 }
