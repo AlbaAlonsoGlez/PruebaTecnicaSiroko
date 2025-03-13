@@ -7,7 +7,6 @@ class ShoppingCart {
     public function __construct(
         private string $shoppingCartId,
         private string $customerId,
-        
         private array $shoppingCartLine,
         private int $status,
    ){}
@@ -24,6 +23,8 @@ class ShoppingCart {
     public function getStatus(): int{
         return $this->status;
     }
+    
+
     public function setShoppingCartId(string $shoppingCartId): void{
         $this->shoppingCartId = $shoppingCartId;
     }
