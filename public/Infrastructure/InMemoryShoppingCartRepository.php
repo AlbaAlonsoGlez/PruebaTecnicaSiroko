@@ -10,11 +10,11 @@ use Domain\ShoppingCartRepository;
 
 class InMemoryShoppingCartRepository implements ShoppingCartRepository{
 
-    public function getAll(): array{
+    public function getAllShoppingCartProducts(): array{
 
-        $inMemoryShoppingCartLineRepository=[];
-        return $inMemoryShoppingCartLineRepository;
+        return array_values($this->products);
     }
+
     private array $products = [];
     public function addProduct( ShoppingCartLine $cartLine): void{
 
@@ -30,7 +30,5 @@ class InMemoryShoppingCartRepository implements ShoppingCartRepository{
         }
     }
 
-    public function getProducts(): array { 
-        return array_values($this->products);
-    }    
+   
 }

@@ -5,6 +5,7 @@ namespace Application;
 use Domain\Product;
 use Domain\ShoppingCart;
 use Domain\Customer;
+use Domain\ShoppingCartRepository;
 use Domain\ProductRepository;
 use Domain\CustomerRepository;
 use Exceptions\ItemNotAvailableException;
