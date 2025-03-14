@@ -10,6 +10,7 @@ use Domain\CustomerRepository;
 use Exceptions\ItemNotAvailableException;
 use Exceptions\NoStockAvailableException;
 use Exceptions\CustomerNotFoundException;
+use Infrastructure\InMemoryShoppingCartRepository;
 
 class AddToCartUseCase
 {
