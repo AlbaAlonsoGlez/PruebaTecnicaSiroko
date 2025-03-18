@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace Infrastructure;
 
+require_once __DIR__ . '/../Domain/ProductRepository.php';
+require_once __DIR__ . '/../Domain/Product.php';
+
 use Domain\Product;
 use Domain\ProductRepository;
 
@@ -63,7 +66,7 @@ class InMemoryProductRepository implements ProductRepository{
             id: 'C-110',
             name: 'Madryn-W',
             description: 'GaChaqueta sherpa mujer.',
-            price: 89.95,
+            price: 90,
             stock: 120,
         );
 
@@ -87,7 +90,7 @@ class InMemoryProductRepository implements ProductRepository{
             id: 'E-110',
             name: 'Nuuk',
             description: 'Gorro de invierno fisherman.',
-            price: 24.95,
+            price: 25,
             stock: 40,
         );
 

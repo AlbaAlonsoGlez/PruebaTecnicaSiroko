@@ -9,7 +9,7 @@ class Product{
         private string $id,
         private string $name,
         private string $description,
-        private float $price,
+        private int $price,
         private int $stock
     ){}
 
@@ -27,7 +27,7 @@ class Product{
 
     }
 
-    public function getPrice(): float{
+    public function getPrice(): int{
 
         return $this->price;
 
@@ -51,7 +51,7 @@ class Product{
 
     }
 
-    public function setPrice(float $price): void{
+    public function setPrice(int $price): void{
 
         $this->price = $price;
 

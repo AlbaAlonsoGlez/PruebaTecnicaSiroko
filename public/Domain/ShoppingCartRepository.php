@@ -6,7 +6,7 @@ namespace Domain;
 
 interface ShoppingCartRepository
 {
-    public function getAllShoppingCartProducts(): array;
-    //public function byOrderId(string $orderId): ?ShoppingCart;
-    public function addProduct(ShoppingCartLine $cartLine): void;
+    public function getAllShoppingCarts(): array;
+
+    public function save(ShoppingCart $shoppingCart): void;
 }

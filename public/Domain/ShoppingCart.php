@@ -4,6 +4,17 @@ declare(strict_types=1);
 namespace Domain;
 
 class ShoppingCart {
+    public const STATUS_ACTIVE = 1;
+    public const STATUS_INCOMPLETE = 2;
+    public const STATUS_COMPLETED = 3;
+    public const STATUS_AWAITING_PAYMENT = 4;
+
+    public const AVAILBALE_STATUSES = [
+        self::STATUS_ACTIVE,
+        self::STATUS_INCOMPLETE,
+        self::STATUS_COMPLETED,
+        self::STATUS_AWAITING_PAYMENT
+    ];
     public function __construct(
         private string $shoppingCartId,
         private string $customerId,
@@ -23,8 +34,6 @@ class ShoppingCart {
     public function getStatus(): int{
         return $this->status;
     }
-    
-
     public function setShoppingCartId(string $shoppingCartId): void{
         $this->shoppingCartId = $shoppingCartId;
     }
@@ -35,6 +44,25 @@ class ShoppingCart {
         $this->shoppingCartLine = $shoppingCartLine;
     }
     public function setStatus(int $status): void{
-        $this->status = $status;
+        if (!in_array($status, self::AVAILBALE_STATUSES)) {
+            throw new \InvalidArgumentException('Invalid status');
+        }
     }
+
+    public function addProduct(Product $product, int $quantity): void{
+       /**
+        * Necesitamos: id del producto y cantidad del mismo
+        *
+        * Si el producto ya existe en el carrito, actualiza la cantidad
+        */
+        foreach ($this->shoppingCartLine as $cartLine) {
+            if ($cartLine->getItemId() === $product->getId()) {
+                $cartLine->incrementQuantity($quantity);
+                return;
+            }
+        }
+        // Si es un producto nuevo, agrégalo al carrito`
+        $this->shoppingCartLine[] = new ShoppingCartLine($product->getId(), $quantity);
+    }
+    
 }

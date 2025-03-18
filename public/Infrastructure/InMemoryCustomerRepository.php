@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Infrastructure;
 
+require_once __DIR__ . '/../Domain/CustomerRepository.php';
+
 use Domain\Customer;
 use Domain\CustomerRepository;
 use Domain\CustomerAddress;

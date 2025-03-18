@@ -4,31 +4,22 @@ declare(strict_types=1);
 
 namespace Infrastructure;
 
+require_once __DIR__ ."/../Domain/ShoppingCartRepository.php";
+
+use Domain\Product;
+use Domain\ShoppingCart;
 use Domain\ShoppingCartLine;
 use Domain\ShoppingCartRepository;
 
 
-class InMemoryShoppingCartRepository implements ShoppingCartRepository{
+class InMemoryShoppingCartRepository implements ShoppingCartRepository
+{
+    private array $shoppingCarts = [];
+    public function getAllShoppingCarts(): array{
 
-    public function getAllShoppingCartProducts(): array{
-
-        return array_values($this->products);
+        return array_values($this->shoppingCarts);
     }
-
-    private array $products = [];
-    public function addProduct( ShoppingCartLine $cartLine): void{
-
-        $productId = $cartLine->getItemId();
-
-        // Si el producto ya existe en el carrito, actualiza la cantidad
-        if (isset($this->products[$productId])) {
-            $this->products[$productId]->incrementQuantity($cartLine->getQuantity());
-
-        } else {
-            // Si es un producto nuevo, agrégalo al carrito
-            $this->products[$productId] = $cartLine;
-        }
+    public function save(ShoppingCart $shoppingCart): void{
+        $this->shoppingCarts[$shoppingCart->getShoppingCartId()] = $shoppingCart;
     }
-
-   
 }

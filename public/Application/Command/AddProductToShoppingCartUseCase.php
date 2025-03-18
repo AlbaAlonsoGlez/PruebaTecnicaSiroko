@@ -13,18 +13,13 @@ use Exceptions\NoStockAvailableException;
 use Exceptions\CustomerNotFoundException;
 use Infrastructure\InMemoryShoppingCartRepository;
 
-class AddToCartUseCase
+class AddProductToShoppingCartUseCase
 {
-    private ProductRepository $productRepository;
-    private CustomerRepository $customerRepository;
-    
     public function __construct(
-        ProductRepository $productRepository,
-        CustomerRepository $customerRepository
-    ) {
-        $this->productRepository = $productRepository;
-        $this->customerRepository = $customerRepository;
-    }
+        private ProductRepository $productRepository,
+        private CustomerRepository $customerRepository,
+        private ShoppingCartRepository $shoppingCartRepository
+    ) {}
     
     /**
      * Adds a product to the customer's shopping cart
@@ -38,7 +33,7 @@ class AddToCartUseCase
      * @throws CustomerNotFoundException
      */
     
-    public function execute(string $customerId, string $productId, int $quantity): ShoppingCart
+    public function execute(string $customerId, string $productId, int $quantity): void
     {
         
         // Validate customer exists
@@ -47,32 +42,28 @@ class AddToCartUseCase
              throw new CustomerNotFoundException();
          }
         
-        
+
         // Validate product exists
         $product = $this->productRepository->findByProductId($productId);
         if (!$product) {
             throw new ItemNotAvailableException();
         }
         
+
         // Validate stock availability
         if ($product->getStock() < $quantity) {
             throw new NoStockAvailableException();
         }
-        
+
         // Get or create shopping cart
         $cart = $customer->getShoppingCart();
         if (!$cart) {
-            $cart = new ShoppingCart($customerId, $customer->getAddress()->getCity());
+            $cart = new ShoppingCart('1', $customer->getId(), [], ShoppingCart::STATUS_ACTIVE);
             $customer->setShoppingCart($cart);
         }
-      
-        $cart = new ShoppingCart();
 
         // Add product to cart
         $cart->addProduct($product, $quantity);
-        
-        return $cart;
-
-        //hola
+        $this->shoppingCartRepository->save($cart);
     }
 }
