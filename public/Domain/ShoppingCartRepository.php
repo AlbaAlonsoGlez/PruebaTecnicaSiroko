@@ -6,6 +6,7 @@ namespace Domain;
 
 interface ShoppingCartRepository
 {
+    public function findByShoppingCartId(string $shoppingCartId): ?ShoppingCart;
     public function getAllShoppingCarts(): array;
 
     public function save(ShoppingCart $shoppingCart): void;

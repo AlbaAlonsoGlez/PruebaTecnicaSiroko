@@ -50,11 +50,6 @@ class ShoppingCart {
     }
 
     public function addProduct(Product $product, int $quantity): void{
-       /**
-        * Necesitamos: id del producto y cantidad del mismo
-        *
-        * Si el producto ya existe en el carrito, actualiza la cantidad
-        */
         foreach ($this->shoppingCartLine as $cartLine) {
             if ($cartLine->getItemId() === $product->getId()) {
                 $cartLine->incrementQuantity($quantity);
@@ -63,6 +58,17 @@ class ShoppingCart {
         }
         // Si es un producto nuevo, agrégalo al carrito`
         $this->shoppingCartLine[] = new ShoppingCartLine($product->getId(), $quantity);
+    }
+
+    public function removeProduct(Product $product): void
+    {
+        foreach ($this->shoppingCartLine as $cartLine => $line) {
+            if ($line->getProduct()->getId() === $product->getId()) {
+                unset($this->shoppingCartLine[$cartLine]);
+                $this->shoppingCartLine = array_values($this->shoppingCartLine);
+                return;
+            }
+        }
     }
     
 }

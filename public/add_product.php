@@ -15,10 +15,6 @@ use Infrastructure\InMemoryCustomerRepository;
 use Infrastructure\InMemoryShoppingCartRepository;
 use Application\AddProductToShoppingCartUseCase;
 
-$product= 'BX Resistance';
-$productRepository = new InMemoryProductRepository();
-
-
 $InMemoryCustomerRepository = new InMemoryCustomerRepository();
 $customer = $InMemoryCustomerRepository->findById('80580845T');
 
