@@ -3,6 +3,9 @@
 declare(strict_types=1);
 namespace Domain;
 
+require_once __DIR__ .'/../Exceptions/InvalidLengthException.php';
+
+
 use Exceptions\EmptyArgumentException;
 use Exceptions\InvalidArgumentException;
 use Exceptions\InvalidLengthException;
@@ -33,7 +36,7 @@ class CustomerAddress
         if (strpos($this->postalCode, '-') === 0) {
             throw new InvalidArgumentException();
         }
-        if(strlen($this->postalCode) >= 5 && strlen($this->postalCode) <= 6) {
+        if(strlen($this->postalCode) < 5 || strlen($this->postalCode) > 6) {
             throw new InvalidLengthException();
         }
     
