@@ -75,10 +75,7 @@ class ShoppingCart {
         foreach ($this->shoppingCartLine as $cartLine) {
             if($cartLine->getItemId() === $product->getId()) {
                 $cartLine->setQuantity($newQuantity);
-                echo "Cantidad actualizada con éxito";
                 return;
-            }else{
-                echo "Producto no encontrado";
             }
         }
     }

@@ -26,14 +26,16 @@ $InMemoryShoppingCartRepository = new InMemoryShoppingCartRepository();
 $InMemoryProductRepository = new InMemoryProductRepository();
 $product = $InMemoryProductRepository->findByProductId('A-120');
 
-
+//__________________________________________________________
+//- - - - - - - - - - Creamos el Carrito - - - - - - - - - -
+//__________________________________________________________
 $addToCartUseCase = new AddProductToShoppingCartUseCase($InMemoryProductRepository, $InMemoryCustomerRepository, $InMemoryShoppingCartRepository);
 $addToCartUseCase->execute($customer->getId(), $product->getId(), 1);
 
 $allCarts=$InMemoryShoppingCartRepository->getAllShoppingCarts();
 $shoppingCart = $InMemoryShoppingCartRepository->findByShoppingCartId('1');
 
-echo "- - - - - - - - - - Creación carrito - - - - - - - - - -<br>";
+echo "- - - - - - - - - - Creación carrito - - - - - - - - - -\n";
 echo " ";
 var_dump($shoppingCart);
 
@@ -41,6 +43,6 @@ $newQuantity=5;
 $modifyQuantityUseCase = new ModifyQuantityUseCase($InMemoryProductRepository,  $InMemoryShoppingCartRepository, $newQuantity);
 $modifyQuantityUseCase->execute($shoppingCart->getShoppingCartId(), $product->getId(), $newQuantity);
 
-echo "<br><br>- - - - - - - - - - Modificación de carrito - - - - - - - - - -<br>";
+echo "- - - - - - - - - - Modificación de carrito - - - - - - - - - -";
 var_dump($shoppingCart);
 die();

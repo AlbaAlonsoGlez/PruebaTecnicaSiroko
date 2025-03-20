@@ -4,17 +4,13 @@ declare(strict_types=1);
 
 namespace Application;
 
-use Domain\Product;
 use Domain\ShoppingCart;
-use Domain\Customer;
 use Domain\ShoppingCartRepository;
 use Domain\ProductRepository;
-use Domain\CustomerRepository;
 use Exceptions\ItemNotAvailableException;
 use Exceptions\ProductNotFoundException;
 use Exceptions\ShoppingCartNotFoundException;
 use Exceptions\CustomerNotFoundException;
-use Infrastructure\InMemoryShoppingCartRepository;
 
 class ModifyQuantityUseCase {
 

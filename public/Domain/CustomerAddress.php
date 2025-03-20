@@ -5,13 +5,11 @@ namespace Domain;
 
 require_once __DIR__ .'/../Exceptions/InvalidLengthException.php';
 
-
 use Exceptions\EmptyArgumentException;
 use Exceptions\InvalidArgumentException;
 use Exceptions\InvalidLengthException;
 
-class CustomerAddress
-{
+class CustomerAddress{
     public function __construct(
         private string $street,
         private string $city,
@@ -93,8 +91,6 @@ class CustomerAddress
     {
         $this->postalCode = $postalCode;
     }
-
-
 }
 
 

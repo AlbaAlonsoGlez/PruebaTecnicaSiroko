@@ -9,7 +9,6 @@ require_once __DIR__ . '/Domain/CustomerAddress.php';
 require __DIR__ . '/Domain/ShoppingCart.php';
 require __DIR__ . '/Domain/ShoppingCartLine.php';
 
-use Domain\Customer;    
 use Infrastructure\InMemoryProductRepository;
 use Infrastructure\InMemoryCustomerRepository;
 use Infrastructure\InMemoryShoppingCartRepository;
