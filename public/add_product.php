@@ -25,7 +25,7 @@ $InMemoryShoppingCartRepository = new InMemoryShoppingCartRepository();
 
 $customerRepository = new InMemoryCustomerRepository();
 
-$addToCartUseCase = new AddProductToShoppingCartUseCase($productRepository, $customerRepository, $InMemoryShoppingCartRepository);
+$addToCartUseCase = new AddProductToShoppingCartUseCase($InMemoryProductRepository, $InMemoryCustomerRepository, $InMemoryShoppingCartRepository);
 
 $addToCartUseCase->execute($customer->getId(), $product->getId(), 1);
 

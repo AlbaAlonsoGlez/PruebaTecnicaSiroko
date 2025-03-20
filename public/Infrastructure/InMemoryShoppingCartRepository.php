@@ -13,6 +13,7 @@ use Domain\ShoppingCartRepository;
 
 class InMemoryShoppingCartRepository implements ShoppingCartRepository
 {
+    private array $shoppingCarts = [];
     public function getShoppingCarts(): array{
 
         $SC1 = new ShoppingCart (
@@ -36,7 +37,7 @@ class InMemoryShoppingCartRepository implements ShoppingCartRepository
         return null;
     }
 
-    private array $shoppingCarts = [];
+    
     public function getAllShoppingCarts(): array{
 
         return array_values($this->shoppingCarts);

@@ -63,10 +63,22 @@ class ShoppingCart {
     public function removeProduct(Product $product): void
     {
         foreach ($this->shoppingCartLine as $cartLine => $line) {
-            if ($line->getProduct()->getId() === $product->getId()) {
+            if ($line->getItemId() === $product->getId()) {
                 unset($this->shoppingCartLine[$cartLine]);
                 $this->shoppingCartLine = array_values($this->shoppingCartLine);
                 return;
+            }
+        }
+    }
+
+    public function modifyProductQuantity(Product $product, int $newQuantity): void{
+        foreach ($this->shoppingCartLine as $cartLine) {
+            if($cartLine->getItemId() === $product->getId()) {
+                $cartLine->setQuantity($newQuantity);
+                echo "Cantidad actualizada con éxito";
+                return;
+            }else{
+                echo "Producto no encontrado";
             }
         }
     }
