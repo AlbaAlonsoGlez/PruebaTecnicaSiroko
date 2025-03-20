@@ -30,9 +30,9 @@ $addToCartUseCase = new AddProductToShoppingCartUseCase($InMemoryProductReposito
 $addToCartUseCase->execute($customer->getId(), $product->getId(), 1);
 
 $allCarts=$InMemoryShoppingCartRepository->getAllShoppingCarts();
-$shoppingCart = $InMemoryShoppingCartRepository->findByShoppingCartId('1');
+$shoppingCart = $InMemoryShoppingCartRepository->findByShoppingCartId('SC1');
 
-echo "- - - - - - - - - - Creación carrito - - - - - - - - - -\n";
+echo "- - - - - - - - - - Creación carrito - - - - - - - - - -<br>";
 echo " ";
 var_dump($shoppingCart);
 
@@ -40,6 +40,6 @@ var_dump($shoppingCart);
 $removeFromCartUseCase = new RemoveFromCartUseCase($InMemoryProductRepository, $InMemoryCustomerRepository, $InMemoryShoppingCartRepository);
 $removeFromCartUseCase->execute($shoppingCart->getShoppingCartId(), $product->getId());
 
-echo "- - - - - - - - - - Eliminación carrito - - - - - - - - - -";
+echo "<br><br>- - - - - - - - - - Eliminación carrito - - - - - - - - - -<br>";
 var_dump($shoppingCart);
 die();

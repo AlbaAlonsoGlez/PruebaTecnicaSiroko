@@ -58,7 +58,7 @@ class AddProductToShoppingCartUseCase
         // Get or create shopping cart
         $cart = $customer->getShoppingCart();
         if (!$cart) {
-            $cart = new ShoppingCart('1', $customer->getId(), [], ShoppingCart::STATUS_ACTIVE);
+            $cart = new ShoppingCart('SC1', $customer->getId(), [], ShoppingCart::STATUS_ACTIVE);
             $customer->setShoppingCart($cart);
         }
 

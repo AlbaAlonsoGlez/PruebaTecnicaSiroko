@@ -31,7 +31,7 @@ $addToCartUseCase = new AddProductToShoppingCartUseCase($InMemoryProductReposito
 $addToCartUseCase->execute($customer->getId(), $product->getId(), 1);
 
 $allCarts=$InMemoryShoppingCartRepository->getAllShoppingCarts();
-$shoppingCart = $InMemoryShoppingCartRepository->findByShoppingCartId('1');
+$shoppingCart = $InMemoryShoppingCartRepository->findByShoppingCartId('SC1');
 
 echo "- - - - - - - - - - Creación carrito - - - - - - - - - -<br>";
 echo " ";
