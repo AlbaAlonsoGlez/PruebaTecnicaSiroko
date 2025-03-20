@@ -39,10 +39,3 @@ echo "- - - - - - - - - - Creación carrito - - - - - - - - - -\n";
 echo " ";
 var_dump($shoppingCart);
 
-$newQuantity=5;
-$modifyQuantityUseCase = new ModifyQuantityUseCase($InMemoryProductRepository,  $InMemoryShoppingCartRepository, $newQuantity);
-$modifyQuantityUseCase->execute($shoppingCart->getShoppingCartId(), $product->getId(), $newQuantity);
-
-echo "- - - - - - - - - - Modificación de carrito - - - - - - - - - -";
-var_dump($shoppingCart);
-die();
