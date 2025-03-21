@@ -9,7 +9,7 @@ class ShoppingCart {
     public const STATUS_COMPLETED = 3;
     public const STATUS_AWAITING_PAYMENT = 4;
 
-    public const AVAILBALE_STATUSES = [
+    public const AVAILABALE_STATUSES = [
         self::STATUS_ACTIVE,
         self::STATUS_INCOMPLETE,
         self::STATUS_COMPLETED,
@@ -44,7 +44,7 @@ class ShoppingCart {
         $this->shoppingCartLine = $shoppingCartLine;
     }
     public function setStatus(int $status): void{
-        if (!in_array($status, self::AVAILBALE_STATUSES)) {
+        if (!in_array($status, self::AVAILABALE_STATUSES)) {
             throw new \InvalidArgumentException('Invalid status');
         }
     }

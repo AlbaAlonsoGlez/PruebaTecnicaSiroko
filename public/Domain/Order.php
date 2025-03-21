@@ -12,7 +12,7 @@ class Order {
     public const STATUS_INDELIVERY = 2;
     public const STATUS_DELIVERED = 3;
 
-    public const AVAILBALE_STATUSES = [
+    public const AVAILABALE_STATUSES = [
         self::STATUS_DRAFT,
         self::STATUS_ORDERED,
         self::STATUS_INDELIVERY,
