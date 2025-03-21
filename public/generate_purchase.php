@@ -1,30 +1,37 @@
 <?php
 
-require_once __DIR__ ."/Application/Command/AddProductToShoppingCartUseCase.php";  
-require_once __DIR__ ."/Application/Command/ModifyQuantityUseCase.php";
+require_once __DIR__ ."/Application/Command/AddProductToShoppingCartUseCase.php"; 
+require_once __DIR__ ."/Application/Command/GeneratePurchaseUseCase.php"; 
 require_once __DIR__ . '/Infrastructure/InMemoryProductRepository.php';
 require_once __DIR__ . '/Infrastructure/InMemoryCustomerRepository.php';
 require_once __DIR__ . '/Infrastructure/InMemoryShoppingCartRepository.php';
+require_once __DIR__ . "/Infrastructure/InMemoryOrderRepository.php";
 require_once __DIR__ . '/Domain/Customer.php';
 require_once __DIR__ . '/Domain/CustomerAddress.php';
+require_once __DIR__ . "/Domain/Order.php";
+require_once __DIR__ . "/Domain/OrderLine.php";
 require __DIR__ . '/Domain/ShoppingCart.php';
 require __DIR__ . '/Domain/ShoppingCartLine.php';
 
 
+use Application\AddProductToShoppingCartUseCase;
+use Application\GeneratePurchaseUseCase;
 use Infrastructure\InMemoryProductRepository;
 use Infrastructure\InMemoryCustomerRepository;
 use Infrastructure\InMemoryShoppingCartRepository;
-use Application\AddProductToShoppingCartUseCase;
-use Application\ModifyQuantityUseCase;
+use Infrastructure\InMemoryOrderRepository;
+
 
 $InMemoryCustomerRepository = new InMemoryCustomerRepository();
 $customer = $InMemoryCustomerRepository->findById('80580845T');
 
-$InMemoryShoppingCartRepository = new InMemoryShoppingCartRepository();
-
-
 $InMemoryProductRepository = new InMemoryProductRepository();
 $product = $InMemoryProductRepository->findByProductId('A-120');
+
+$InMemoryShoppingCartRepository = new InMemoryShoppingCartRepository();
+
+$InMemoryOrderRepository = new InMemoryOrderRepository();
+
 
 //__________________________________________________________
 //- - - - - - - - - - Creamos el Carrito - - - - - - - - - -
@@ -33,16 +40,20 @@ $addToCartUseCase = new AddProductToShoppingCartUseCase($InMemoryProductReposito
 $addToCartUseCase->execute($customer->getId(), $product->getId(), 1);
 
 $allCarts=$InMemoryShoppingCartRepository->getAllShoppingCarts();
-$shoppingCart = $InMemoryShoppingCartRepository->findByShoppingCartId('1');
+$shoppingCart = $InMemoryShoppingCartRepository->findByShoppingCartId('SC1');
 
-echo "- - - - - - - - - - Creación carrito - - - - - - - - - -\n";
-echo " ";
+echo "- - - - - - - - - - Creación carrito - - - - - - - - - -<br>\n";
 var_dump($shoppingCart);
+echo "<br>";
 
-$newQuantity=5;
-$modifyQuantityUseCase = new ModifyQuantityUseCase($InMemoryProductRepository,  $InMemoryShoppingCartRepository, $newQuantity);
-$modifyQuantityUseCase->execute($shoppingCart->getShoppingCartId(), $product->getId(), $newQuantity);
+//_________________________________________________________
+//- - - - - - - - - - Creamos el Pedido - - - - - - - - - -
+//_________________________________________________________
+$generatePurchaseUseCase = new GeneratePurchaseUseCase( $InMemoryProductRepository, $InMemoryCustomerRepository, $InMemoryShoppingCartRepository, $InMemoryOrderRepository);
+$generatePurchaseUseCase->execute($shoppingCart->getShoppingCartId(), $customer->getId());
 
-echo "- - - - - - - - - - Modificación de carrito - - - - - - - - - -";
-var_dump($shoppingCart);
+$allOrders = $InMemoryOrderRepository->getAllOrders();
+$order = $InMemoryOrderRepository->findByOrderId("order1");
+echo "<br><br>- - - - - - - - - - Generación de pedido - - - - - - - - - -<br>";
+var_dump($order);
 die();

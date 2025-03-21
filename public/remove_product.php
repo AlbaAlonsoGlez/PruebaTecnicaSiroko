@@ -25,7 +25,9 @@ $InMemoryShoppingCartRepository = new InMemoryShoppingCartRepository();
 $InMemoryProductRepository = new InMemoryProductRepository();
 $product = $InMemoryProductRepository->findByProductId('A-120');
 
-
+//__________________________________________________________
+//- - - - - - - - - - Creamos el Carrito - - - - - - - - - -
+//__________________________________________________________
 $addToCartUseCase = new AddProductToShoppingCartUseCase($InMemoryProductRepository, $InMemoryCustomerRepository, $InMemoryShoppingCartRepository);
 $addToCartUseCase->execute($customer->getId(), $product->getId(), 1);
 
@@ -36,7 +38,9 @@ echo "- - - - - - - - - - Creación carrito - - - - - - - - - -<br>";
 echo " ";
 var_dump($shoppingCart);
 
-
+//______________________________________________________________
+//- - - - - - - - - - Eliminamos el Producto - - - - - - - - - -
+//______________________________________________________________
 $removeFromCartUseCase = new RemoveFromCartUseCase($InMemoryProductRepository, $InMemoryCustomerRepository, $InMemoryShoppingCartRepository);
 $removeFromCartUseCase->execute($shoppingCart->getShoppingCartId(), $product->getId());
 

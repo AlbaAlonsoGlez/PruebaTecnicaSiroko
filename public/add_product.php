@@ -24,10 +24,13 @@ $InMemoryShoppingCartRepository = new InMemoryShoppingCartRepository();
 
 $customerRepository = new InMemoryCustomerRepository();
 
+//__________________________________________________________
+//- - - - - - - - - - Creamos el Carrito - - - - - - - - - -
+//__________________________________________________________
 $addToCartUseCase = new AddProductToShoppingCartUseCase($InMemoryProductRepository, $InMemoryCustomerRepository, $InMemoryShoppingCartRepository);
-
 $addToCartUseCase->execute($customer->getId(), $product->getId(), 1);
-
 $allCarts=$InMemoryShoppingCartRepository->getAllShoppingCarts();
+
+echo "- - - - - - - - - - Creación carrito - - - - - - - - - -<br>\n";
 var_dump($allCarts);
 die();

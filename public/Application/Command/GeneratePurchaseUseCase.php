@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Application;
 
 use DateTime;
+use DateTimeImmutable;
 use Domain\Product;
 use Domain\ShoppingCart;
 use Domain\Customer;
@@ -39,7 +40,7 @@ class generatePurchaseUseCase {
      * @throws CustomerNotFoundException
      */
     
-    public function execute(string $shoppingCartId, string $customerId, string $orderId): void{
+    public function execute(string $shoppingCartId, string $customerId): void{
 
         // Validamos el Carrito
         $cart = $this->shoppingCartRepository->findByShoppingCartId($shoppingCartId);
@@ -53,7 +54,7 @@ class generatePurchaseUseCase {
             throw new CustomerNotFoundException();
         }
 
-        $order = new Order($cart->getShoppingCartId(), $customer->getId(), Date("Y-m-d H:i:s"),$cart->getShoppingCartLine(), $customer->getAddress(), Order::STATUS_ORDERED);
+        $order = new Order('order1', $customer->getId(), $cart->getShoppingCartId(), new DateTimeImmutable(date("Y-m-d H:i:s")), $cart->getShoppingCartLine(), $customer->getAddress(), Order::STATUS_DRAFT);
 
         $order->generatePurchase($cart, $customer);
         $this->orderRepository->save($order);
