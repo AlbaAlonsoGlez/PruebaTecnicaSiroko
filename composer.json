@@ -1,0 +1,6 @@
+{
+    "name": "j/prueba-tecnica-siroko",
+    "require": {
+        "phpunit/phpunit": "^11.5"
+    }
+}
